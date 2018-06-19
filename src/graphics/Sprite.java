@@ -30,7 +30,7 @@ public class Sprite {
 		image = myImage;
 		this.setSize();
 
-		System.out.println("Sprite is (" + height + "," + width + ")");
+		// System.out.println("Sprite is (" + height + "," + width + ")");
 
 	}
 

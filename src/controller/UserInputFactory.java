@@ -6,7 +6,10 @@
  */
 package controller;
 
+import graphics.GamePanel;
 import graphics.WizardInterface;
+
+import javax.swing.*;
 
 /**
  * @author Ivan Stuart
@@ -18,30 +21,35 @@ public class UserInputFactory {
 
 	public static int NUMBER_OF_KEYS = 7;
 
-	public static UserInput create(WizardInterface aWizard, String keys)
+	public static void create(GamePanel gamePanel, WizardInterface aWizard, String keys, boolean isPlayerOne)
 			throws Exception {
+
 		if (keys.length() != NUMBER_OF_KEYS) {
 			throw new Exception("Incorrect number of user input keys defined!");
 		}
-		UserInput user1 = new UserInput();
-		user1.add(keys.substring(0, 1), new Move(aWizard, -1));
-		user1.add(keys.substring(1, 2), new Move(aWizard, 1));
 
-		user1.add(keys.substring(2, 3), new ManaBuildUp(aWizard));
-		user1.add(keys.substring(3, 4), new CastDefence(aWizard));
-		user1.add(keys.substring(4, 5), new CastAttack(aWizard, "a"));
-		user1.add(keys.substring(5, 6), new CastAttack(aWizard, "t"));
-		user1.add(keys.substring(6, 7), new CastAttack(aWizard, "o"));
+		setupKeyStroke(gamePanel, new Move(aWizard, -1), keys.substring(0, 1));
+		setupKeyStroke(gamePanel, new Move(aWizard, 1), keys.substring(1, 2));
 
-		// TODO factor this out elsewhere?
+		setupKeyStroke(gamePanel, new ManaBuildUp(aWizard) , keys.substring(2, 3));
+		setupKeyStroke(gamePanel, new CastDefence(aWizard), keys.substring(3, 4));
+		setupKeyStroke(gamePanel, new CastAttack(aWizard, "a"), keys.substring(4, 5));
+		setupKeyStroke(gamePanel, new CastAttack(aWizard, "t"), keys.substring(5, 6));
+		setupKeyStroke(gamePanel, new CastAttack(aWizard, "o"), keys.substring(6, 7));
 
-		user1.add("n", new MusicOff(null));
-		user1.add("m", new MusicOn(null));
+		if (isPlayerOne) {
+			setupKeyStroke(gamePanel, new MusicOff(null), "n");
+			setupKeyStroke(gamePanel, new MusicOn(null), "m");
 
-		user1.add("0", new PauseGame(null));
-		user1.add("1", new UnPauseGame(null));
+			setupKeyStroke(gamePanel, new PauseGame(null), "0");
+			setupKeyStroke(gamePanel, new UnPauseGame(null), "1");
+		}
 
-		return user1;
+	}
+
+	private static void setupKeyStroke(GamePanel gamePanel, Action action, String key) {
+		gamePanel.getInputMap().put(KeyStroke.getKeyStroke(key.charAt(0)),key);
+		gamePanel.getActionMap().put(key, action);
 	}
 
 }

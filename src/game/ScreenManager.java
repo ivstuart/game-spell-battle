@@ -9,15 +9,11 @@ package game;
 import graphics.GamePanel;
 import graphics.GraphicsManager;
 import graphics.StatusPanel;
-
-import java.awt.BorderLayout;
-import java.awt.Container;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import sound.AudioCache;
 import wizDesigner.DesignerPanel;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Ivan Stuart
@@ -32,7 +28,7 @@ public class ScreenManager {
 	private Container pane;
 
 	private DesignerPanel designPanel;
-	private JPanel gamePanel;
+	private GamePanel gamePanel;
 
 	public static GraphicsManager gManager;
 
@@ -41,7 +37,7 @@ public class ScreenManager {
 
 	public ScreenManager() {
 
-		frame = new JFrame("War Of The Warlocks v1.0");
+		frame = new JFrame("War Of The Warlocks v2.0");
 
 		pane = frame.getContentPane();
 
@@ -131,14 +127,19 @@ public class ScreenManager {
 		// IvanSound.loop("music1");
 		status1.init(designPanel.getStats1());
 		status2.init(designPanel.getStats2());
+
+		gamePanel.initPlayerOneControls();
 		if (designPanel.isAIon()) {
-			((GamePanel) gamePanel).setAIon();
+			gamePanel.setAIon();
+		}
+		else {
+			gamePanel.initPlayerTwoControls();
 		}
 		pane.remove(designPanel);
 		pane.add(gamePanel, BorderLayout.SOUTH);
 		frame.pack();
 		gamePanel.requestFocus();
-		((GamePanel) gamePanel).init();
+		gamePanel.init();
 
 	}
 

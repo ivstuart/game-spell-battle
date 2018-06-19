@@ -8,13 +8,16 @@ package controller;
 
 import graphics.WizardInterface;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+
 /**
  * @author Ivan Stuart
  * 
  *         TODO To change the template for this generated type comment go to
  *         Window - Preferences - Java - Code Style - Code Templates
  */
-public abstract class Pressable {
+public abstract class Pressable extends AbstractAction {
 
 	private WizardInterface wizard;
 
@@ -27,5 +30,11 @@ public abstract class Pressable {
 	}
 
 	public abstract void pressed();
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.pressed();
+	}
+
 
 }

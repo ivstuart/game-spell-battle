@@ -6,29 +6,21 @@
  */
 package graphics;
 
+import controller.AIInput;
+import controller.UserInputFactory;
 import game.GameManager;
 import game.ScreenManager;
-
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import sound.AudioCache;
 import spells.AttackSpell;
 import spells.DefenceSpell;
 import spells.SpellInterface;
-import controller.AIInput;
-import controller.UserInput;
-import controller.UserInputFactory;
-import controller.WizardController;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Ivan Stuart
@@ -129,20 +121,33 @@ public class GamePanel extends JPanel {
 		wizard1.setBounds(0, 300);
 		wizard2.setBounds(600, 900);
 
-		UserInput user1 = null;
-		UserInput user2 = null;
+//		try {
+//			// This is the new user control code
+//			UserInputFactory.create(this,wizard1, "aszxcvb",true);
+//
+//			UserInputFactory.create(this, wizard2, "oplkjhg", false);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		GameManager.setPaused(true);
 
+	}
+
+	public void initPlayerOneControls() {
 		try {
-			// This is the new user control code
-			user1 = UserInputFactory.create(wizard1, "aszxcvb");
-			user2 = UserInputFactory.create(wizard2, "oplkjhg");
+			UserInputFactory.create(this,wizard1, "aszxcvb",true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		GameManager.setPaused(true);
-		addKeyListener(new WizardController(user1));
-		addKeyListener(new WizardController(user2));
+	}
 
+	public void initPlayerTwoControls() {
+		try {
+			UserInputFactory.create(this, wizard2, "oplkjhg", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void add(Sprite aSprite) {
@@ -361,7 +366,7 @@ public class GamePanel extends JPanel {
 	 * 
 	 */
 	public void setAIon() {
-		// TODO Auto-generated method stub
+		// System.out.println("AI is on");
 		ai = new AIInput(wizard2);
 	}
 }

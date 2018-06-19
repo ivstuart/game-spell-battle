@@ -6,11 +6,11 @@
  */
 package graphics;
 
-import java.awt.Image;
-
 import sound.AudioCache;
 import spells.AttackSpell;
 import spells.DefenceSpell;
+
+import java.awt.*;
 
 /**
  * @author Ivan Stuart
@@ -175,7 +175,6 @@ public class Wizard extends Sprite implements WizardInterface {
 	 */
 	@Override
 	public void move(int direction) {
-		// TODO Auto-generated method stub
 		this.dx += MOVE_SPEED * direction;
 	}
 

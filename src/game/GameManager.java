@@ -8,13 +8,11 @@ package game;
 
 import graphics.GamePanel;
 import graphics.Sprite;
-
-import java.util.List;
-
-import javax.swing.JFrame;
-
 import sound.AudioCache;
 import spells.effects.EffectFactory;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  * @author Ivan Stuart
@@ -30,7 +28,7 @@ public class GameManager {
 
 	private boolean running = true;
 
-	// private long storedTime;
+	//private long storedTime;
 
 	private long elaspedTime;
 
@@ -61,7 +59,7 @@ public class GameManager {
 
 	private void run() {
 
-		// storedTime = System.currentTimeMillis();
+		//storedTime = System.currentTimeMillis();
 
 		while (running) {
 
@@ -110,10 +108,9 @@ public class GameManager {
 			return;
 		}
 
-		/**
-		 * elaspedTime = System.currentTimeMillis() - storedTime; storedTime =
-		 * System.currentTimeMillis();
-		 */
+		 //elaspedTime = System.currentTimeMillis() - storedTime;
+		// storedTime =  System.currentTimeMillis();
+
 
 		elaspedTime = 16;
 

@@ -35,7 +35,6 @@ public class Move extends Pressable {
 	 */
 	@Override
 	public void pressed() {
-		// TODO Auto-generated method stub
 		super.getWizard().move(direction);
 	}
 
